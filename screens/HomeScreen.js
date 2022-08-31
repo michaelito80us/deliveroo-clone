@@ -7,7 +7,7 @@ import {
   MagnifyingGlassIcon,
   AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
-import Categories from '../components/categories';
+import Categories from '../components/Categories';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -24,7 +24,7 @@ const HomeScreen = () => {
       <View className="flex-row items-center pb-3 mx-4 space-x-2">
         <Image
           source={{
-            url: "https://links.papareact.com/wru",
+            uri: "https://links.papareact.com/wru",
           }}
           className="p-4 bg-gray-300 rounded-full w-7 h-7"
         />
@@ -58,6 +58,11 @@ const HomeScreen = () => {
           <Categories />
 
           {/* featured rows */}
+          <FeaturedRow
+            title="Featured Restaurants"
+            description="Top picks for you"
+            featuredCategory="featured"
+          />
 
       </ScrollView>
     </SafeAreaView>
