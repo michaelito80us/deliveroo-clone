@@ -8,6 +8,7 @@ import {
   AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
 import Categories from '../components/Categories';
+import FeaturedRow from '../components/FeaturedRow';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -29,9 +30,7 @@ const HomeScreen = () => {
           className="p-4 bg-gray-300 rounded-full w-7 h-7"
         />
         <View className="flex-1">
-          <Text className="text-xs font-bold text-gray-400">
-            Deliver Now!
-          </Text>
+          <Text className="text-xs font-bold text-gray-400">Deliver Now!</Text>
           <Text className="text-xl font-bold">
             Current Location
             <ChevronDownIcon size={20} color="#00CCBB" />
@@ -46,23 +45,41 @@ const HomeScreen = () => {
           <MagnifyingGlassIcon size={20} color="grey" />
           <TextInput
             placeholder="Restaurants and cuisines"
-            keyboardType='default'
+            keyboardType="default"
           />
         </View>
         <AdjustmentsVerticalIcon color="#00CCBB" />
       </View>
 
       {/* body */}
-      <ScrollView className='bg-slate-100'>
-          {/* categories */}
-          <Categories />
+      <ScrollView className="bg-slate-100">
 
-          {/* featured rows */}
-          <FeaturedRow
-            title="Featured Restaurants"
-            description="Top picks for you"
-            featuredCategory="featured"
-          />
+        {/* categories */}
+        <Categories />
+
+        {/* Featured */}
+        <FeaturedRow
+          id="1"
+          title="Featured"
+          description="Paid placements from our Partners"
+          featuredCategory="featured"
+        />
+
+        {/* Tasty Discounts */}
+        <FeaturedRow
+          id="2"
+          title="Tasty Discounts"
+          description="Everyone's been enjoying lthese juicy discounts!"
+          featuredCategory="discounts"
+        />
+
+        {/* Offers near you! */}
+        <FeaturedRow
+          id="3"
+          title="Offers near you!"
+          description="Why not support your local restaurant tonight!"
+          featuredCategory="offers"
+        />
 
       </ScrollView>
     </SafeAreaView>
