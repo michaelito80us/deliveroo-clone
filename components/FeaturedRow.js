@@ -25,7 +25,7 @@ const FeaturedRow = ({id, title, description, featuredCategory}) => {
         <ResturantCards
           id="1"
           imgUrl="https://links.papareact.com/gn7"
-          title="The Best Burgers"
+          title="The Best Burgers in town"
           rating={4.5}
           genre="Burgers"
           address="1234 Main St"
