@@ -4,4 +4,5 @@
 - React Native Navigation
 - Tailwind CSS
 - Expo
-- 
+- Sanity
+- GroQ
