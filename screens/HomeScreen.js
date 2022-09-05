@@ -36,7 +36,7 @@ const HomeScreen = () => {
     })
   }, [])
 
-  console.log({featuredCategories});
+  // console.log({featuredCategories});
 
 
   return (
@@ -72,34 +72,46 @@ const HomeScreen = () => {
       </View>
 
       {/* body */}
-      <ScrollView className="bg-slate-100">
+      <ScrollView className=" bg-slate-100">
 
         {/* categories */}
         <Categories />
 
+          {/* use the ? operator to check if the array is empty */}
+        { /* JSX */
+          featuredCategories?.map(category => (
+            <FeaturedRow
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.short_description}
+            />
+          ))
+        }
+
         {/* Featured */}
-        <FeaturedRow
+        {/* <FeaturedRow
           id="1"
           title="Featured"
           description="Paid placements from our Partners"
           featuredCategory="featured"
-        />
+        /> */}
 
         {/* Tasty Discounts */}
-        <FeaturedRow
+        {/* <FeaturedRow
           id="2"
           title="Tasty Discounts"
           description="Everyone's been enjoying lthese juicy discounts!"
           featuredCategory="discounts"
-        />
+        /> */}
 
         {/* Offers near you! */}
-        <FeaturedRow
+        {/* <FeaturedRow
           id="3"
           title="Offers near you!"
           description="Why not support your local restaurant tonight!"
           featuredCategory="offers"
-        />
+        /> */}
 
       </ScrollView>
     </SafeAreaView>
