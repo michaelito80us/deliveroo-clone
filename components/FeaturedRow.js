@@ -25,7 +25,7 @@ const FeaturedRow = ({id, title, description, featuredCategory}) => {
     })
   },[id])
 
-  console.log({restaurants})
+  // console.log({restaurants})
 
   return (
     <View>
