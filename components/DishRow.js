@@ -11,7 +11,7 @@ import {
   selectBasketItemsWithId,
 } from "../features/basketSlice";
 
-const DishRow = ({ key, id, name, description, price, image }) => {
+const DishRow = ({ id, name, description, price, image }) => {
   const [isPressed, setIsPressed] = useState(false);
   const dispatch = useDispatch();
   const items = useSelector((state) => selectBasketItemsWithId(state, id));
@@ -21,7 +21,11 @@ const DishRow = ({ key, id, name, description, price, image }) => {
   };
 
   const removeItemFromBasket = () => {
-    dispatch(removeFromBasket({ id }));
+    if (items.length > 0) {
+      dispatch(removeFromBasket({ id }));
+    } else {
+      setIsPressed(false);
+    }
   };
 
   return (
@@ -39,7 +43,7 @@ const DishRow = ({ key, id, name, description, price, image }) => {
 
             <Text className="pr-6 text-sm text-gray-400">{description}</Text>
             <Text className="mt-2 text-base text-gray-400">
-              <Currency quantity={price} currency="EUR" />
+              <Currency quantity={price} currency="CNY" />
             </Text>
           </View>
           <Image
@@ -54,9 +58,14 @@ const DishRow = ({ key, id, name, description, price, image }) => {
       {isPressed && (
         <View className="px-4 bg-white">
           <View className="flex-row items-center pb-3 space-x-2">
-            <TouchableOpacity onPress={removeItemFromBasket}>
-              {/* <TouchableOpacity onPress={(items.length > 0) && removeItemFromBasket}> */}
-              <MinusCircleIcon color="#00ccbb" size={40} />
+            <TouchableOpacity
+              disabled={items.length <= 0}
+              onPress={removeItemFromBasket}
+            >
+              <MinusCircleIcon
+                color={items.length > 0 ? "#00ccbb" : "lightgray"}
+                size={40}
+              />
             </TouchableOpacity>
 
             <Text>{items.length}</Text>

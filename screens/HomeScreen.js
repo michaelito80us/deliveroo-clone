@@ -1,29 +1,38 @@
-import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from 'react-native'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  TextInput,
+  ScrollView,
+} from "react-native";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   UserIcon,
   ChevronDownIcon,
   MagnifyingGlassIcon,
   AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
-import Categories from '../components/Categories';
-import FeaturedRow from '../components/FeaturedRow';
-import sanityClient from '../sanity';
+import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
-  const [featuredCategories, setFeaturedCategories] = useState([])
+  const [featuredCategories, setFeaturedCategories] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     // fetch stuff from the backend
-    sanityClient.fetch(`
+    sanityClient
+      .fetch(
+        `
       *[_type == "featured"] {
         ...,
         restaurants[] -> {
@@ -31,13 +40,14 @@ const HomeScreen = () => {
           dishes[] -> {}
         }
       }
-    `).then((data) => {
-      setFeaturedCategories(data)
-    })
-  }, [])
+    `
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
 
   // console.log({featuredCategories});
-
 
   return (
     <SafeAreaView className="pt-5 bg-white">
@@ -72,50 +82,51 @@ const HomeScreen = () => {
       </View>
 
       {/* body */}
-      <ScrollView className=" bg-slate-100">
-
-        {/* categories */}
-        <Categories />
+      <View className="mb-10 pb-36">
+        <ScrollView className=" bg-slate-100">
+          {/* categories */}
+          <Categories />
 
           {/* use the ? operator to check if the array is empty */}
-        { /* JSX */
-          featuredCategories?.map(category => (
-            <FeaturedRow
-              key={category._id}
-              id={category._id}
-              title={category.name}
-              description={category.short_description}
-            />
-          ))
-        }
+          {
+            /* JSX */
+            featuredCategories?.map((category) => (
+              <FeaturedRow
+                key={category._id}
+                id={category._id}
+                title={category.name}
+                description={category.short_description}
+              />
+            ))
+          }
 
-        {/* Featured */}
-        {/* <FeaturedRow
+          {/* Featured */}
+          {/* <FeaturedRow
           id="1"
           title="Featured"
           description="Paid placements from our Partners"
           featuredCategory="featured"
         /> */}
 
-        {/* Tasty Discounts */}
-        {/* <FeaturedRow
+          {/* Tasty Discounts */}
+          {/* <FeaturedRow
           id="2"
           title="Tasty Discounts"
           description="Everyone's been enjoying lthese juicy discounts!"
           featuredCategory="discounts"
         /> */}
 
-        {/* Offers near you! */}
-        {/* <FeaturedRow
+          {/* Offers near you! */}
+          {/* <FeaturedRow
           id="3"
           title="Offers near you!"
           description="Why not support your local restaurant tonight!"
           featuredCategory="offers"
         /> */}
-
-      </ScrollView>
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
-}
+};
 
-export default HomeScreen
+export default HomeScreen;
