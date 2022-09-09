@@ -2,6 +2,7 @@
 
 - React Native
 - React Native Navigation
+- Redux
 - Tailwind CSS
 - Expo
 - Sanity
